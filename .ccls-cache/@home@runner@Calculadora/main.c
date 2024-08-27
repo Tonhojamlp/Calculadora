@@ -3,10 +3,13 @@
 #include <string.h>
 
 
-void base2(int numero, int *array){
+int base2(int numero, int *array){
   int aux = 3;
   int n= 0;
-  while(numero > 0){
+  if(numero < 0){
+    numero = numero*-1;
+  }
+  while(numero > 0 ){
     aux = numero%2;
 
     if(aux == 1 ){
@@ -25,12 +28,16 @@ void base2(int numero, int *array){
     printf("%d",array[i]);
   }
   printf("\n");
+  return n;
 }
 
 void base8(int numero){
   int array[32];
   int aux;
   int n= 0;
+  if(numero < 0){
+    numero = numero*-1;
+  }
   while(numero > 0){
     aux = numero%8;
     
@@ -52,10 +59,13 @@ void base16(int numero){
   int aux;
   char numeroAlterado;
   int n= 0;
+  if(numero < 0){
+    numero = numero*-1;
+  }
   while(numero > 0){
     aux = numero%16;
 
-    if(aux < 10){
+    if(aux < 10 ){
       array[n] = '0' + aux;
       printf("divisao = %d/16 \n resto = %d\n",numero, aux);
     }
@@ -80,6 +90,9 @@ void BCD(int numero){
   int array[128];
   int aux;
   int n= 0;
+  if(numero < 0){
+    numero = numero*-1;
+  }
   while(numero > 0){
     
     aux = numero%10;
@@ -93,34 +106,34 @@ void BCD(int numero){
         array[n++] = 0;
         break;
       case 1:
-        array[n++] = 0;
-        array[n++] = 0;
-        array[n++] = 0;
         array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
         break;
       case 2 :
         array[n++] = 0;
-        array[n++] = 0;
         array[n++] = 1;
+        array[n++] = 0;
         array[n++] = 0;
         break;
       case 3:
-        array[n++] = 0;
-        array[n++] = 0;
         array[n++] = 1;
         array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 0;
         break;
       case 4:
         array[n++] = 0;
-        array[n++] = 1;
         array[n++] = 0;
+        array[n++] = 1;
         array[n++] = 0;
         break;
       case 5:
-        array[n++] = 0;
         array[n++] = 1;
         array[n++] = 0;
         array[n++] = 1;
+        array[n++] = 0;
         break;
       case 6:
         array[n++] = 0;
@@ -129,16 +142,16 @@ void BCD(int numero){
         array[n++] = 0;
         break;
       case 7:
+        array[n++] = 1;
+        array[n++] = 1;
+        array[n++] = 1;
         array[n++] = 0;
-        array[n++] = 1;
-        array[n++] = 1;
-        array[n++] = 1;
         break;
       case 8:
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
         array[n++] = 1;
-        array[n++] = 0;
-        array[n++] = 0;
-        array[n++] = 0;
         break;
       case 9:
         array[n++] = 1;
@@ -158,6 +171,38 @@ void BCD(int numero){
   printf("\n");
 }
 
+void a2(int *array, int n, int numero){
+  int posi = 0;
+  int arrayA2[32];
+  int c = 0;
+
+  if(numero < 0){
+    arrayA2[0] = 1;
+  }else if(numero > 0){
+    arrayA2[0] = 0;
+  }
+  for(int i = 0 ; i <= n ; i++){
+      if(posi == 0){
+        arrayA2[c+1] = array[i];
+      }else if(posi ==1){
+        if(array[i] == 1){
+          arrayA2[c+1] = 0;
+        }else{
+          arrayA2[c+1] = 1;
+        }
+       
+      }
+    if(array[i] == 1){
+      posi = 1;
+    }
+      c++;
+    }
+  for(int i = 0; i <= c-1 ; i++){
+    printf("%d",arrayA2[i]);
+    }
+  
+} 
+
 int main(void) {
   int numero;
   int array[32];
@@ -166,20 +211,16 @@ int main(void) {
 
   scanf("%d",&numero);
   printf("\nBINARIO:\n\n");
-  base2(numero, array);
+  int n = base2(numero, array);
   printf("\nOCTAL\n");
   base8(numero);
   printf("\nHEXADECIMAL\n");
   base16(numero);
   printf("\nBCD\n\n");
   BCD(numero);
-  
 
-  
-
-  
-
-    
-  
+  printf("\nComplemento A2\n");
+  a2(array,n,numero);
+      
   
 }
