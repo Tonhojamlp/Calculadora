@@ -39,11 +39,38 @@ void base8(int numero){
     n = n+1;
     numero = numero/8;
 
-
   }
   printf("\nSeu numero em octal = ");
   for(int i = n-1; i >= 0 ; i--){
     printf("%d",array[i]);
+  }
+  printf("\n");
+}
+
+void base16(int numero){
+  char array[32];
+  int aux;
+  char numeroAlterado;
+  int n= 0;
+  while(numero > 0){
+    aux = numero%16;
+
+    if(aux < 10){
+      array[n] = '0' + aux;
+      printf("divisao = %d/16 \n resto = %d\n",numero, aux);
+    }
+    else{
+      array[n] = 'A' + (aux-10);
+      printf("divisao = %d/16 \n resto = %d\n",numero, aux);
+    }
+    n = n+1;
+    numero = numero/16;
+
+
+  }
+  printf("\nSeu numero em hexadecimal = ");
+  for(int i = n-1; i >= 0 ; i--){
+    printf("%c",array[i]);
   }
 }
 
@@ -58,6 +85,10 @@ int main(void) {
   base2(numero, array);
   printf("\nOCTAL\n");
   base8(numero);
+  printf("\nHEXADECIMAL\n");
+  base16(numero);
+  printf("\nBCD\n");
+  
 
   
 
