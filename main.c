@@ -72,6 +72,90 @@ void base16(int numero){
   for(int i = n-1; i >= 0 ; i--){
     printf("%c",array[i]);
   }
+  printf("\n");
+}
+
+
+void BCD(int numero){
+  int array[128];
+  int aux;
+  int n= 0;
+  while(numero > 0){
+    
+    aux = numero%10;
+
+    switch(aux){
+      case 0:
+        
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
+        break;
+      case 1:
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 1;
+        break;
+      case 2 :
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 0;
+        break;
+      case 3:
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 1;
+        break;
+      case 4:
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 0;
+        break;
+      case 5:
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 1;
+        break;
+      case 6:
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 1;
+        array[n++] = 0;
+        break;
+      case 7:
+        array[n++] = 0;
+        array[n++] = 1;
+        array[n++] = 1;
+        array[n++] = 1;
+        break;
+      case 8:
+        array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 0;
+        break;
+      case 9:
+        array[n++] = 1;
+        array[n++] = 0;
+        array[n++] = 0;
+        array[n++] = 1;
+        break;
+    }
+    printf("divisao = %d/10 \n resto = %d\n",numero, aux);
+    numero = numero/10;
+
+  }
+  printf("\nSeu numero em BCD = ");
+  for(int i = n-1; i >= 0 ; i--){
+    printf("%d",array[i]);
+  }
+  printf("\n");
 }
 
 int main(void) {
@@ -87,7 +171,8 @@ int main(void) {
   base8(numero);
   printf("\nHEXADECIMAL\n");
   base16(numero);
-  printf("\nBCD\n");
+  printf("\nBCD\n\n");
+  BCD(numero);
   
 
   
